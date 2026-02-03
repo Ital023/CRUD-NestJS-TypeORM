@@ -14,9 +14,9 @@ POST {{baseUrl}}/recados/
 Content-Type: application/json
 
 {
-    "texto": "4 NOVO Recado", 
-    "de": "Joana", 
-    "para": "João"
+    "texto": "Olá como você está", 
+    "deId": 6, 
+    "paraId": 7
 }
 
 ###
@@ -29,7 +29,9 @@ PATCH {{baseUrl}}/recados/6/
 Content-Type: application/json
 
 {
-"texto": "Recado 1", "lido": true
+"texto": "Recado 1", 
+"lido": true,
+
 }
 
 
@@ -50,9 +52,9 @@ POST {{baseUrl}}/pessoas/
 Content-Type: application/json
 
 {
-    "email": "email@email.com", 
+    "email": "joao@gmail.com", 
     "password": "123456", 
-    "nome": "Luiz"
+    "nome": "joao"
 }
 
 ###

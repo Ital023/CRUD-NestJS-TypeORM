@@ -12,4 +12,11 @@ export class CreateRecadoDto {
   @MinLength(5)
   @MaxLength(255)
   readonly texto: string;
+
+  @IsPositive()
+  deId: number;
+
+  @IsPositive()
+  paraId: number;
+
 }

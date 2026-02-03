@@ -11,7 +11,7 @@ export class RecadosService {
   constructor(
     @InjectRepository(Recado)
     private readonly recadoRepository: Repository<Recado>,
-    private readonly pessoasService: PessoasService
+    private readonly pessoasService: PessoasService,
   ) {}
 
   throwNotFoundError() {
@@ -19,14 +19,31 @@ export class RecadosService {
   }
 
   async create(createRecadoDto: CreateRecadoDto) {
+    const { deId, paraId } = createRecadoDto;
+
+    const de = await this.pessoasService.findOne(deId);
+
+    const para = await this.pessoasService.findOne(paraId);
+
     const novoRecado = {
-      ...createRecadoDto,
+      texto: createRecadoDto.texto,
+      de,
+      para,
       lido: false,
       data: new Date(),
     };
     const recado = await this.recadoRepository.create(novoRecado);
+    await this.recadoRepository.save(recado);
 
-    return this.recadoRepository.save(recado);
+    return {
+      ...recado,
+      de: {
+        id: recado.de.id
+      },
+      para: {
+        id: recado.para.id
+      }
+    }
   }
 
   async findAll() {
@@ -47,18 +64,17 @@ export class RecadosService {
   async update(id: number, updateRecadoDto: UpdateRecadoDto) {
     const partialUpdateRecadoDto = {
       lido: updateRecadoDto?.lido,
-      texto: updateRecadoDto?.texto
-    }
+      texto: updateRecadoDto?.texto,
+    };
 
     const recado = await this.recadoRepository.preload({
       id,
-      ...partialUpdateRecadoDto
+      ...partialUpdateRecadoDto,
     });
 
-    if(!recado) return this.throwNotFoundError();
+    if (!recado) return this.throwNotFoundError();
 
     return this.recadoRepository.save(recado);
-
   }
 
   async remove(id: number) {
