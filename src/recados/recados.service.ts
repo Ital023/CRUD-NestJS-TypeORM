@@ -38,22 +38,51 @@ export class RecadosService {
     return {
       ...recado,
       de: {
-        id: recado.de.id
+        id: recado.de.id,
       },
       para: {
-        id: recado.para.id
-      }
-    }
+        id: recado.para.id,
+      },
+    };
   }
 
   async findAll() {
-    const recados = await this.recadoRepository.find();
+    const recados = await this.recadoRepository.find({
+      relations: ['de', 'para'],
+      order: {
+        id: 'desc',
+      },
+      select: {
+        de: {
+          id: true,
+          nome: true,
+        },
+        para: {
+          id: true,
+          nome: true,
+        },
+      },
+    });
     return recados;
   }
 
   async findOne(id: number) {
     const recado = await this.recadoRepository.findOne({
       where: { id },
+      relations: ['de', 'para'],
+      order: {
+        id: 'desc',
+      },
+      select: {
+        de: {
+          id: true,
+          nome: true,
+        },
+        para: {
+          id: true,
+          nome: true,
+        },
+      },
     });
 
     if (!recado) return this.throwNotFoundError();
