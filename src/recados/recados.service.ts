@@ -1,0 +1,36 @@
+import { Injectable } from '@nestjs/common';
+import { CreateRecadoDto } from './dto/create-recado.dto';
+import { UpdateRecadoDto } from './dto/update-recado.dto';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Recado } from './entities/recado.entity';
+import { Repository } from 'typeorm';
+
+@Injectable()
+export class RecadosService {
+
+  constructor(
+    @InjectRepository(Recado)
+    private readonly recadoRepository: Repository<Recado>,
+  ){}
+
+  create(createRecadoDto: CreateRecadoDto) {
+    return 'This action adds a new recado';
+  }
+
+  async findAll() {
+    const recados = await this.recadoRepository.find();
+    return recados;
+  }
+
+  findOne(id: number) {
+    return `This action returns a #${id} recado`;
+  }
+
+  update(id: number, updateRecadoDto: UpdateRecadoDto) {
+    return `This action updates a #${id} recado`;
+  }
+
+  remove(id: number) {
+    return `This action removes a #${id} recado`;
+  }
+}
