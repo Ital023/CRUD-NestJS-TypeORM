@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, HttpCode, HttpStatus, Query } from '@nestjs/common';
 import { RecadosService } from './recados.service';
 import { CreateRecadoDto } from './dto/create-recado.dto';
 import { UpdateRecadoDto } from './dto/update-recado.dto';
@@ -12,8 +12,11 @@ export class RecadosController {
     return this.recadosService.create(createRecadoDto);
   }
 
+  @HttpCode(HttpStatus.OK)
   @Get()
-  findAll() {
+  async findAll(@Query() pagination: any) {
+    const { limit = 10, offset = 0 } = pagination;
+
     return this.recadosService.findAll();
   }
 

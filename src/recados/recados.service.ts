@@ -19,7 +19,7 @@ export class RecadosService {
 
   async findAll() {
     const recados = await this.recadoRepository.find();
-    return recados;
+    return recados
   }
 
   findOne(id: number) {
