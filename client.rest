@@ -53,9 +53,9 @@ POST {{baseUrl}}/pessoas/
 Content-Type: application/json
 
 {
-    "email": "leo@gmail.com", 
+    "email": "luiz@email.com", 
     "password": "123456", 
-    "nome": "leo"
+    "nome": "luiz"
 }
 
 ###
