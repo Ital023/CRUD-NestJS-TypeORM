@@ -71,3 +71,16 @@ Content-Type: application/json
 ###
 
 DELETE {{baseUrl}}/pessoas/2/
+
+
+###
+
+#AUTH
+
+POST {{baseUrl}}/auth
+Content-Type: application/json
+
+{
+    "email": "luiz@email.com",
+    "password": "123456"
+}
