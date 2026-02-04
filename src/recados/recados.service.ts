@@ -66,7 +66,7 @@ export class RecadosService {
     return recados;
   }
 
-  async findOne(id: number) {
+  async findOne(id: number): Promise<Recado> {
     const recado = await this.recadoRepository.findOne({
       where: { id },
       relations: ['de', 'para'],
@@ -85,23 +85,16 @@ export class RecadosService {
       },
     });
 
-    if (!recado) return this.throwNotFoundError();
+    if (!recado) this.throwNotFoundError();
 
     return recado;
   }
 
   async update(id: number, updateRecadoDto: UpdateRecadoDto) {
-    const partialUpdateRecadoDto = {
-      lido: updateRecadoDto?.lido,
-      texto: updateRecadoDto?.texto,
-    };
+    const recado = await this.findOne(id);
 
-    const recado = await this.recadoRepository.preload({
-      id,
-      ...partialUpdateRecadoDto,
-    });
-
-    if (!recado) return this.throwNotFoundError();
+    recado.texto = updateRecadoDto?.texto ?? recado.texto;
+    recado.lido = updateRecadoDto?.lido ?? recado.lido;
 
     return this.recadoRepository.save(recado);
   }

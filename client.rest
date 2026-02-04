@@ -25,12 +25,12 @@ DELETE {{baseUrl}}/recados/5/
 
 ###
 
-PATCH {{baseUrl}}/recados/6/ 
+PATCH {{baseUrl}}/recados/7/ 
 Content-Type: application/json
 
 {
-"texto": "Recado 1", 
-"lido": true,
+    "texto": "olaaa", 
+    "lido": true
 
 }
 
