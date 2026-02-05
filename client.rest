@@ -1,5 +1,7 @@
 @baseUrl = http://localhost:3000
 
+@authToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEwLCJlbWFpbCI6Imx1aXpAZW1haWwuY29tIiwiaWF0IjoxNzcwMjY2MDM0LCJleHAiOjE3NzAyNjk2MzQsImF1ZCI6Imh0dHA6Ly9sb2NhbGhvc3Q6MzAwMCIsImlzcyI6Imh0dHA6Ly9sb2NhbGhvc3Q6MzAwMCJ9.pdDf3kSBeh3FILlDG7UNpGHhHyLCvbzJODGlAmc_110
+
 # Recados
 ###
 GET {{baseUrl}}/recados/
@@ -71,7 +73,8 @@ Content-Type: application/json
 
 ###
 
-DELETE {{baseUrl}}/pessoas/2/
+DELETE {{baseUrl}}/pessoas/10/
+Authorization: Bearer {{authToken}}
 
 
 ###
