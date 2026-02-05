@@ -5,10 +5,17 @@ import { AuthController } from './auth.controller';
 import { AuthService } from './auth.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Pessoa } from 'src/pessoas/entities/pessoa.entity';
+import { JwtModule } from '@nestjs/jwt';
+import jwtConfig from './config/jwt.config';
+import { ConfigModule } from '@nestjs/config';
 
 @Global()
 @Module({
-  imports: [TypeOrmModule.forFeature([Pessoa])],
+  imports: [
+    TypeOrmModule.forFeature([Pessoa]),
+    ConfigModule.forFeature(jwtConfig),
+    JwtModule.registerAsync(jwtConfig.asProvider()),
+  ],
   controllers: [AuthController],
   providers: [
     {
